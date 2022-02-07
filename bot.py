@@ -5,29 +5,41 @@ from nextcord.ext import commands
 from nextcord.ui import Button, View
 import os
 from dotenv import load_dotenv
-import Music
 #---
 
-load_dotenv()
+load_dotenv() # env var for token
 
-logging.basicConfig(filename="discord.log", level=logging.INFO, format="%(asctime)s: %(levelname)s - %(message)s")
+logging.basicConfig(filename="discord.log", level=logging.INFO, format="%(asctime)s: %(levelname)s - %(message)s")  # log file
 
-client = commands.Bot(command_prefix="$") # custom prefix command?
+
+#discrd---
+client = commands.Bot(command_prefix="$")
+
 
 @client.command()
 async def ping(ctx):
     latency = client.latency
     await ctx.send(f"Numerical latency: {latency} ms")
 
-
 @client.command()
-async def butt(ctx):
-    button = Button(label="Portions", style=nextcord.ButtonStyle.blurple)
-    async def button_callback(interaction):
+async def menu(ctx):
+    
+    #btns---
+    btn1 = Button(label="Portions", style=nextcord.ButtonStyle.blurple)
+    async def btn1_cb(interaction):
         await interaction.response.edit_message(content="Physics: Ray Optics, Wave Optics\nChemistry: Amines, Aldehydes, Electrochemistry\nEnglish:\nComputer: Data Structures, Computer Networks, SQL with Python\nMaths: Integrals, Probability ")
-    button.callback = button_callback
+    btn1.callback = btn1_cb
+
+    btn2 = Button(label="Midterm Timetable", style=nextcord.ButtonStyle.danger)
+    async def btn2_cb(interaction):
+        await interaction.response.edit_message(content="14th - Chemistry\n15th - English\n16th - Math\n17th - Computer\n18th - Physics")
+    btn2.callback = btn2_cb
+
     view = View()
-    view.add_item(button)
+    view.add_item(btn1)
+    view.add_item(btn2)
+    #---
+
     await ctx.send("Slave reporting for duty!", view=view)
     
 
@@ -35,11 +47,6 @@ async def butt(ctx):
 async def on_ready():
     logging.info("Bot online")
 
-cogs = [Music]
-
-@client.event
-for i in range(len(cogs)):
-    cogs[i].setup(client)
-
     
 client.run(os.getenv("DISCORD_TOKEN"))
+#---
