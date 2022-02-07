@@ -5,6 +5,7 @@ from nextcord.ext import commands
 from nextcord.ui import Button, View
 import os
 from dotenv import load_dotenv
+import Music
 #---
 
 load_dotenv()
@@ -33,6 +34,12 @@ async def butt(ctx):
 @client.event
 async def on_ready():
     logging.info("Bot online")
+
+cogs = [Music]
+
+@client.event
+for i in range(len(cogs)):
+    cogs[i].setup(client)
 
     
 client.run(os.getenv("DISCORD_TOKEN"))
