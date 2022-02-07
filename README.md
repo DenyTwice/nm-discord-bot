@@ -6,5 +6,7 @@
 - [ ] Streaming Music
 - [ ] Academics Tracking
 - [ ] Buttons for everything
+- [ ] Getting the link for class 
+
 
 
