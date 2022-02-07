@@ -2,7 +2,13 @@
 import logging
 import nextcord
 from nextcord.ext import commands
+import os
+from dotenv import load_dotenv
 #---
+
+load_dotenv()
+
+logging.basicConfig(filename="discord.log", level=logging.INFO, format="%(asctime)s: %(levelname)s - %(message)s")
 
 client = commands.Bot(command_prefix="$") # custom prefix command?
 
@@ -11,11 +17,10 @@ async def ping(ctx):
     latency = client.latency
     await ctx.send(f"Numerical latency: {latency} ms")
 
+
 @client.event
 async def on_ready():
-    print("")
+    logging.info("Bot online")
 
     
-client.run("OTM4NzI2NzA1NDI0NjQ2MjA0.YfufXw.KJtG08ZgjTdbH2CkhlYpr-PgNSo")
-
-logging.basicConfig(level=logging.DEBUG, format="%(levelname)s-%(message)s")
+client.run(os.getenv("DISCORD_TOKEN"))
