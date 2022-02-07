@@ -22,5 +22,5 @@ async def ping(ctx):
 async def on_ready():
     logging.info("Bot online")
 
-    
+
 client.run(os.getenv("DISCORD_TOKEN"))
