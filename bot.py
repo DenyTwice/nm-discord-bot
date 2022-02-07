@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 load_dotenv() # env var for token
 
-logging.basicConfig(filename="discord.log", level=logging.INFO, format="%(asctime)s: %(levelname)s - %(message)s")  # log file
+logging.basicConfig(filename="discord.log", level=logging.INFO, format="%(asctime)s: %(levelname)s - %(message)s", filemode="w")  # log file
 
 
 #discrd---
@@ -45,7 +45,7 @@ async def menu(ctx):
 
 @client.event
 async def on_ready():
-    logging.info("Bot online")
+    logging.info("BOT ONLINE")
 
     
 client.run(os.getenv("DISCORD_TOKEN"))
